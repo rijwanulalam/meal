@@ -8,6 +8,11 @@ const getMeals = (iputText) => {
 const showMeals = (meals) => {
   const mealSection = document.getElementById("meals-container");
   mealSection.innerHTML = "";
+  if(meals === null || meals.length === 0){
+    alert("Sorry no food found in this category");
+    loader(false);
+    window.location.reload();
+  }
   meals.forEach((meal) => {
     // console.log(meal.idMeal)
     const mealDiv = document.createElement("div");
@@ -29,6 +34,7 @@ const showMeals = (meals) => {
     mealSection.appendChild(mealDiv);
     loader(false);
   });
+
 };
 
 document.getElementById("search-btn").addEventListener("click", function () {
