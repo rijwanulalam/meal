@@ -53,6 +53,7 @@ document.getElementById("input").addEventListener("keypress", function(e){
 
 const showMealDetails = (idMeal) => {
   // console.log(idMeal);
+  // loader(true);
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
   fetch(url)
     .then((res) => res.json())
@@ -82,6 +83,7 @@ const modalDetails = meal => {
 </div>
     `;
     mealDetails.appendChild(modalDiv);
+    // loader(false);
 };
 
 const loader = isLoading => {
