@@ -40,6 +40,13 @@ document.getElementById("input").addEventListener("keyup", function (event) {
   getMeals(searchText);
 });
 
+document.getElementById("input").addEventListener("keypress", function(e){
+  if(e.key === 'Enter'){
+    const inputText = document.getElementById("input").value;
+    getMeals(inputText);
+  }
+})
+
 const showMealDetails = (idMeal) => {
   // console.log(idMeal);
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
