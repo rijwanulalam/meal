@@ -27,23 +27,27 @@ const showMeals = (meals) => {
       </div>
       `;
     mealSection.appendChild(mealDiv);
+    loader(false);
   });
 };
 
 document.getElementById("search-btn").addEventListener("click", function () {
   const inputText = document.getElementById("input").value;
   getMeals(inputText);
+  loader(true);
 });
 
-document.getElementById("input").addEventListener("keyup", function (event) {
-  const searchText = event.target.value;
-  getMeals(searchText);
-});
+// document.getElementById("input").addEventListener("keyup", function (event) {
+//   const searchText = event.target.value;
+//   getMeals(searchText);
+//   loader(true);
+// });
 
 document.getElementById("input").addEventListener("keypress", function(e){
   if(e.key === 'Enter'){
     const inputText = document.getElementById("input").value;
     getMeals(inputText);
+    loader(true);
   }
 })
 
@@ -79,5 +83,14 @@ const modalDetails = meal => {
     `;
     mealDetails.appendChild(modalDiv);
 };
+
+const loader = isLoading => {
+  const loaderSection = document.getElementById("loader");
+  if(isLoading){
+    loaderSection.classList.remove("d-none");
+  }else{
+    loaderSection.classList.add("d-none")
+  }
+}
 
 getMeals("fish");
