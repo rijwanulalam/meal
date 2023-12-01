@@ -9,11 +9,13 @@ const getMeals = (iputText) => {
 const showMeals = (meals) => {
   const mealSection = document.getElementById("meals-container");
   mealSection.innerHTML = "";
+  meals = meals.splice(0, 8);
   if(meals === null || meals.length === 0){
     alert("Sorry no food found in this category");
     loader(false);
     window.location.reload();
   }
+  
   meals.forEach((meal) => {
     // console.log(meal.idMeal)
     const mealDiv = document.createElement("div");
