@@ -1,21 +1,27 @@
-const getMeals = (iputText) => {
+const getMeals = (iputText ,dataLimit) => {
   loader(true)
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${iputText}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => showMeals(data.meals));
+    .then((data) => showMeals(data.meals, dataLimit));
 };
 
-const showMeals = (meals) => {
+const showMeals = (meals, dataLimit) => {
   const mealSection = document.getElementById("meals-container");
   mealSection.innerHTML = "";
-  meals = meals.splice(0, 8);
+  const showAll = document.getElementById("show-all");
   if(meals === null || meals.length === 0){
     alert("Sorry no food found in this category");
     loader(false);
     window.location.reload();
   }
-  
+  if(dataLimit && meals.length > 8){
+    meals = meals.splice(0, 8);
+    showAll.classList.remove("d-none")
+  }
+  else{
+    showAll.classList.add("d-none");
+  }
   meals.forEach((meal) => {
     // console.log(meal.idMeal)
     const mealDiv = document.createElement("div");
@@ -95,6 +101,12 @@ const modalDetails = meal => {
     loader(false);
 };
 
+document.getElementById("btn-show-all").addEventListener("click", function(){
+  const inputText = document.getElementById("input").value;
+  getMeals(inputText);
+  loader(true);
+})
+
 const loader = isLoading => {
   const loaderSection = document.getElementById("loader");
   if(isLoading){
@@ -104,4 +116,4 @@ const loader = isLoading => {
   }
 }
 
-getMeals("fish");
+getMeals("fish", 8);
